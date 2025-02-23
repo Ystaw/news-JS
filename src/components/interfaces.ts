@@ -9,3 +9,15 @@ export interface Env {
     API_URL: string;
     API_KEY: string;
 }
+
+export interface News {
+    urlToImage?: string;
+    author?: string;
+    publishedAt: string;
+    title: string;
+    source: {
+        name: string;
+    };
+    description: string;
+    url: string;
+}
