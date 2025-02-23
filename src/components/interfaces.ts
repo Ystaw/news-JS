@@ -10,7 +10,7 @@ export interface Env {
     API_KEY: string;
 }
 
-export interface News {
+export interface News_ {
     urlToImage?: string;
     author?: string;
     publishedAt: string;
