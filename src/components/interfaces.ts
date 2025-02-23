@@ -35,3 +35,6 @@ export interface NewsRes extends ResponseData {
     news: News_[];
 }
 
+export interface Callback<T> {
+    (data: T): void;
+}
