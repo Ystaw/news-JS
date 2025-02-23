@@ -1,40 +1,38 @@
+import { ResponseData, LoaderOptions } from '../interfaces'
+
 class Loader {
-    constructor(baseLink, options) {
+    private baseLink: string;
+    private options: LoaderOptions;
+
+    constructor(baseLink: string, options: LoaderOptions) {
         this.baseLink = baseLink;
         this.options = options;
     }
 
-    getResp(
-        { endpoint, options = {} },
-        callback = () => {
-            console.error('No callback for GET response');
-        }
-    ) {
-        this.load('GET', endpoint, callback, options);
+    public getResp<T extends ResponseData>(
+        { endpoint, options = {} }: { endpoint: string; options?: Partial<LoaderOptions> },
+        callback: (data: T) => void
+    ): void {
+        this.load<T>('GET', endpoint, callback, options);
     }
 
-    errorHandler(res) {
+    private errorHandler(res: Response): Response {
         if (!res.ok) {
-            if (res.status === 401 || res.status === 404)
-                console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
-            throw Error(res.statusText);
+                console.error(`Sorry, but there is ${res.status} error: ${res.statusText}`);
+            throw new Error(res.statusText);
         }
 
         return res;
     }
 
-    makeUrl(options, endpoint) {
+    private makeUrl(options: Partial<LoaderOptions>, endpoint: string): string {
         const urlOptions = { ...this.options, ...options };
-        let url = `${this.baseLink}${endpoint}?`;
-
-        Object.keys(urlOptions).forEach((key) => {
-            url += `${key}=${urlOptions[key]}&`;
-        });
-
-        return url.slice(0, -1);
+        const urlParams = new URLSearchParams(urlOptions as Record<string, string>);
+        return `${this.baseLink}${endpoint}?${urlParams.toString()}`;
     }
 
-    load(method, endpoint, callback, options = {}) {
+
+    private load<T extends ResponseData>(method: string, endpoint: string, callback: (data: T) => void, options:Partial <LoaderOptions> = {}) : void {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
