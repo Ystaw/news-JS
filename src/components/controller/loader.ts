@@ -1,4 +1,4 @@
-import { ResponseData, LoaderOptions } from '../interfaces'
+import { ResponseData, LoaderOptions } from '../interfaces';
 
 class Loader {
     private baseLink: string;
