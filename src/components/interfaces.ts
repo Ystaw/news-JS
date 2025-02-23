@@ -10,7 +10,7 @@ export interface Env {
     API_KEY: string;
 }
 
-export interface News_ {
+export interface Article {
     urlToImage?: string;
     author?: string;
     publishedAt: string;
@@ -32,7 +32,7 @@ export interface SourceRes extends ResponseData {
 }
 
 export interface NewsRes extends ResponseData {
-    news: News_[];
+    articles: Article[];
 }
 
 export interface Callback<T> {
