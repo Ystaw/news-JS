@@ -26,3 +26,12 @@ export interface Source {
     id: string;
     name: string;
 }
+
+export interface SourceRes extends ResponseData {
+    sources: Source[];
+}
+
+export interface NewsRes extends ResponseData {
+    news: News_[];
+}
+
