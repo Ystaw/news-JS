@@ -21,3 +21,8 @@ export interface News_ {
     description: string;
     url: string;
 }
+
+export interface Source {
+    id: string;
+    name: string;
+}
