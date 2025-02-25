@@ -5,7 +5,7 @@ class AppLoader extends Loader {
     constructor() {
         const env: Env = {
             API_URL: process.env.API_URL || '',
-            API_KEY: process.env.API_KEY || '',
+            API_KEY: process.env.API_KEY || 'b197089d7dec464d8ecfa2f76ed488ef',
         };
         super(env.API_URL, {
             apiKey: env.API_KEY,
